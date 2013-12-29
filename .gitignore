@@ -1,0 +1,11 @@
+/Algorithms/Algorithms.Core/obj
+/Algorithms/Algorithms.Core/bin
+
+/Algorithms/Algorithms.UnitTests/*.user
+
+/Algorithms/Algorithms.UnitTests/obj
+/Algorithms/Algorithms.UnitTests/bin
+
+/Algorithms/*.suo
+
+/Algorithms/TestResults
