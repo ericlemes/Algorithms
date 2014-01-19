@@ -9,3 +9,16 @@
 /Algorithms/*.suo
 
 /Algorithms/TestResults
+/Python/core/*.pyc
+
+/CSharp/Algorithms.Core/obj
+/CSharp/Algorithms.Core/bin
+
+/CSharp/Algorithms.UnitTests/obj
+/CSharp/Algorithms.UnitTests/bin
+
+/CSharp/*.suo
+
+/CSharp/TestResults
+
+/CSharp/Algorithms.UnitTests/*.user
