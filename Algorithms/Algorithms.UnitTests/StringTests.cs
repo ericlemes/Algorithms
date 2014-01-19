@@ -34,5 +34,29 @@ namespace Algorithms.UnitTests
             foreach (string s in l)
                 Console.WriteLine(s);
         }
+
+        [TestMethod]
+        public void ReverseSentencesInStringTest()
+        {
+            Assert.AreEqual("day nice a", "a nice day".ReverseWordsInSentence());
+            Assert.AreEqual("some  more  spaces", "spaces  more  some".ReverseWordsInSentence());
+            Assert.AreEqual("  spaces  between  ", "  between  spaces  ".ReverseWordsInSentence());
+        }
+
+        [TestMethod]
+        public void TestIsSubstring()
+        {
+            Assert.IsTrue("abcde".IsSubstring("bcd"));
+            Assert.IsFalse("abcde".IsSubstring("def"));
+            Assert.IsFalse("abcde".IsSubstring("fgh"));
+            Assert.IsTrue("abcde".IsSubstring("abcde"));
+        }
+
+        [TestMethod]
+        public void TestLongestEvenPalindromicString()
+        {
+            Assert.AreEqual("abba", "zdcabbax".FindLongestEvenPalindromicString());
+            Assert.AreEqual("cabbac", "zdcabbacx".FindLongestEvenPalindromicString());
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Algorithms.Core;
+using System.Collections.Generic;
 
 namespace Algorithms.UnitTests
 {
@@ -49,6 +50,32 @@ namespace Algorithms.UnitTests
             };
 
             Assert.AreEqual(4, ArrayAlgorithms.GetWordOcurrences(arr, "sachin"));
+        }
+
+        [TestMethod]
+        public void TestFindSubSetWhichSumIsZero()
+        {
+            List<int> l = new List<int>() { 1, 2, 3 };
+
+            SumEqualsZeroResult r = new SumEqualsZeroResult();            
+
+            l.Permute(r.IsValidSolutionForZeroSum);
+
+            Assert.AreEqual(-1, r.Result[0]);
+            Assert.AreEqual(-2, r.Result[1]);
+            Assert.AreEqual(3, r.Result[2]);
+        }
+
+        [TestMethod]
+        public void TestFindSubSetWhichSumIsZero2()
+        {
+            List<int> l = new List<int>() { 10, 5, 20, 3, 2};
+
+            SumEqualsZeroResult r = new SumEqualsZeroResult();
+
+            l.Permute(r.IsValidSolutionForZeroSum);
+
+            Assert.AreEqual(-20, r.Result[0]);            
         }
     }
 }

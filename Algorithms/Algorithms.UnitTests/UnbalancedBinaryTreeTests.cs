@@ -299,6 +299,76 @@ namespace Algorithms.UnitTests
             Assert.AreEqual(3, t.GetHeight());                
         }
 
+        [TestMethod]
+        public void TestCommonAncestor()
+        {
+            UnbalancedBinaryTree<int> t = new UnbalancedBinaryTree<int>();
+            t.Insert(4);
+            t.Insert(2);
+            t.Insert(3);
+            t.Insert(1);
+            t.Insert(6);
+            t.Insert(5);
+            t.Insert(7);
 
+            Assert.AreEqual(4, t.FindCommonAncestor(t.Search(3), t.Search(5)).Item);
+            Assert.AreEqual(4, t.FindCommonAncestor(t.Search(3), t.Search(6)).Item);
+        }
+
+        [TestMethod]
+        public void TestConvertBinaryTreeToDoubleLinkedList()
+        {
+            UnbalancedBinaryTree<int> t = new UnbalancedBinaryTree<int>();
+            t.Insert(4);
+            t.Insert(2);
+            t.Insert(3);
+            t.Insert(1);
+            t.Insert(6);
+            t.Insert(5);
+            t.Insert(7);
+
+            UnbalancedBinaryTreeItem<int> dll = t.ConvertBinaryTreeToDoubleLinkedList(t.Root);
+            while (dll.Left != null)
+                dll = dll.Left;
+
+            Assert.AreEqual(1, dll.Item);
+            Assert.AreEqual(2, dll.Right.Item);
+            Assert.AreEqual(3, dll.Right.Right.Item);
+            Assert.AreEqual(4, dll.Right.Right.Right.Item);
+            Assert.AreEqual(5, dll.Right.Right.Right.Right.Item);
+            Assert.AreEqual(6, dll.Right.Right.Right.Right.Right.Item);
+            Assert.AreEqual(7, dll.Right.Right.Right.Right.Right.Right.Item);
+            Assert.IsNull(dll.Right.Right.Right.Right.Right.Right.Right);
+        }
+
+        [TestMethod]
+        public void TestTraverseByLevel()
+        {
+            UnbalancedBinaryTree<int> t = new UnbalancedBinaryTree<int>();
+            t.Insert(4);
+            t.Insert(2);
+            t.Insert(3);
+            t.Insert(1);
+            t.Insert(6);
+            t.Insert(5);
+            t.Insert(7);
+
+            t.LevelOrderTraversal((i) => { Console.Write(i.Item.ToString() + " "); });
+        }
+
+        [TestMethod]
+        public void TestTraverseByLevelZigZag()
+        {
+            UnbalancedBinaryTree<int> t = new UnbalancedBinaryTree<int>();
+            t.Insert(4);
+            t.Insert(2);
+            t.Insert(3);
+            t.Insert(1);
+            t.Insert(6);
+            t.Insert(5);
+            t.Insert(7);
+
+            t.LevelOrderTraversalZigZag((i) => { Console.Write(i.Item.ToString() + " "); });
+        }
     }
 }

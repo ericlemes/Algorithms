@@ -21,5 +21,33 @@ namespace Algorithms.UnitTests
             Assert.AreEqual(4, merged[3]);
             Assert.AreEqual(5, merged[4]);
         }
+
+        [TestMethod]
+        public void PowerSetTest()
+        {
+            List<int> l = new List<int>() { 1, 2, 3 };
+            HashSet<List<int>> sets = l.PowerSet();
+            foreach (List<int> set in sets)
+            {
+                foreach (int i in set)
+                    Console.Write(i.ToString() + " ");
+                Console.WriteLine();
+            }
+
+        }
+
+        [TestMethod]
+        public void PowerSetTest2()
+        {
+            List<int> l = new List<int>() { 60, 20, 10 };
+            HashSet<List<int>> sets = l.PowerSet();
+            foreach (List<int> set in sets)
+            {
+                foreach (int i in set)
+                    Console.Write(i.ToString() + " ");
+                Console.WriteLine();
+            }
+
+        }
     }
 }

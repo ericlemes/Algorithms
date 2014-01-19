@@ -59,5 +59,37 @@ namespace Algorithms.Core
                     GetRoutesFor(startx + x, starty + y, ref count, arr, currWord + arr[startx + x, starty + y].ToString(), word);
                 }
         }
+
+    }
+
+    public class SumEqualsZeroResult
+    {
+        private List<int> result;
+        public List<int> Result
+        {
+            get { return result; }
+        }
+
+        public ValidatePermutationCallbackResult  IsValidSolutionForZeroSum(
+            IList<int> original, int index, bool isPartial)
+        {
+            List<int> proposed = new List<int>(original);
+
+            int sum = 0;
+            for(int i =0; i < proposed.Count; i++)
+            {
+                proposed[i] *= -1;
+                sum = 0;
+                foreach(int j in proposed)
+                    sum += j;
+                if (sum == 0 || sum < 0)
+                    break;
+            }
+            
+            if (sum == 0)
+                result = proposed;
+
+            return new ValidatePermutationCallbackResult() { ContinuePermutatingThisSubset = true, IsOptimalSolution = sum == 0 };                        
+        }
     }
 }

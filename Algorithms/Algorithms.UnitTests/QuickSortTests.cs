@@ -92,5 +92,13 @@ namespace Algorithms.UnitTests
             Assert.AreEqual(15, l[3]);
             Assert.AreEqual(16, l[4]);
         }
+
+        [TestMethod]
+        public void TestQuickSort6()
+        {
+            List<int> l = new List<int>() { 9, 4, 5, 3, 15, 2 };            
+
+            QuickSort.Sort(l);            
+        }
     }
 }

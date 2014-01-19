@@ -63,7 +63,6 @@ namespace Algorithms.Core
                 i.Item = item;
                 i.Parent = current;
             }
-
         }
 
         /// <summary>
@@ -355,7 +354,111 @@ namespace Algorithms.Core
             else
                 return rightHeight + 1;
         }
+
+        public UnbalancedBinaryTreeItem<T> FindCommonAncestor(UnbalancedBinaryTreeItem<T> n1, UnbalancedBinaryTreeItem<T> n2)
+        {
+            if (n1 == null || n2 == null)
+                return null;
+
+            int n1Height = n1.GetHeight();
+            int n2Height = n2.GetHeight();
+            UnbalancedBinaryTreeItem<T> n1tmp = n1;
+            UnbalancedBinaryTreeItem<T> n2tmp = n2;
+            
+            if (n1Height < n2Height)
+                while (n1Height < n2tmp.GetHeight())
+                    n2tmp = n2tmp.Parent;
+            else if (n2Height < n1Height)
+                while (n2Height < n1tmp.GetHeight() )
+                    n1tmp = n1tmp.Parent;
+                        
+            if (n1tmp.Parent == n2tmp.Parent)
+                return n1tmp.Parent;
+
+            return FindCommonAncestor(n1tmp.Parent, n2tmp.Parent);
+        }
+
+        public UnbalancedBinaryTreeItem<T> ConvertBinaryTreeToDoubleLinkedList(UnbalancedBinaryTreeItem<T> root)
+        {
+            UnbalancedBinaryTreeItem<T> leftList = null;
+            UnbalancedBinaryTreeItem<T> rightList = null;
+            if (root.Left != null)
+                leftList = ConvertBinaryTreeToDoubleLinkedList(root.Left);
+            if (root.Right != null)
+                rightList = ConvertBinaryTreeToDoubleLinkedList(root.Right);
+
+            UnbalancedBinaryTreeItem<T> leftListRightmost = leftList;
+            while (leftListRightmost != null && leftListRightmost.Right != null)
+                leftListRightmost = leftListRightmost.Right;
+            root.Left = leftListRightmost;
+            if (leftListRightmost != null)
+                leftListRightmost.Right = root;
+
+            UnbalancedBinaryTreeItem<T> rightListLeftmost = rightList;
+            while (rightListLeftmost != null && rightListLeftmost.Left != null)
+                rightListLeftmost = rightListLeftmost.Left;
+            root.Right = rightListLeftmost;
+            if (rightListLeftmost != null)
+                rightListLeftmost.Left = root;
+
+            return root;
+        }
+
+        public void LevelOrderTraversal(DoSomethingWithNodeDelegate<T> doSomethingWithNodeCallback)
+        {
+            for (int i = 1; i <= GetHeight(); i++)
+                TraverseLevel(root, i, doSomethingWithNodeCallback);
+        }
+
+        public void LevelOrderTraversalZigZag(DoSomethingWithNodeDelegate<T> doSomethingWithNodeCallback)
+        {
+            bool ltr = false;
+            for (int i = 1; i <= GetHeight(); i++)
+            {
+                TraverseLevelZigZag(root, i, doSomethingWithNodeCallback, ltr);
+                ltr = !ltr;
+            }
+        }
+
+        private void TraverseLevel(UnbalancedBinaryTreeItem<T> item, int level, DoSomethingWithNodeDelegate<T> doSomethingWithNodeCallback)
+        {
+            if (item == null)
+                return;
+
+            if (level == 1)
+                doSomethingWithNodeCallback(item);
+            else
+            {
+                TraverseLevel(item.Left, level - 1, doSomethingWithNodeCallback);
+                TraverseLevel(item.Right, level - 1, doSomethingWithNodeCallback);
+            }
+        }
+
+        private void TraverseLevelZigZag(UnbalancedBinaryTreeItem<T> item, int level, DoSomethingWithNodeDelegate<T> doSomethingWithNodeCallback,
+            bool leftToRight)
+        {
+            if (item == null)
+                return;
+
+            if (level == 1)
+                doSomethingWithNodeCallback(item);
+            else
+            {
+                if (leftToRight)
+                {
+                    TraverseLevelZigZag(item.Left, level - 1, doSomethingWithNodeCallback, leftToRight);
+                    TraverseLevelZigZag(item.Right, level - 1, doSomethingWithNodeCallback, leftToRight);
+                }
+                else
+                {
+                    TraverseLevelZigZag(item.Right, level - 1, doSomethingWithNodeCallback, leftToRight);
+                    TraverseLevelZigZag(item.Left, level - 1, doSomethingWithNodeCallback, leftToRight);
+                }
+            }
+        }
     }
+
+    public delegate void DoSomethingWithNodeDelegate<T>(UnbalancedBinaryTreeItem<T> item);
 
 
     public class UnbalancedBinaryTreeItem<T>
@@ -407,6 +510,14 @@ namespace Algorithms.Core
         public UnbalancedBinaryTreeItem(T item)
         {
             this.Item = item;
+        }
+
+        public int GetHeight()
+        {
+            if (this.Parent == null)
+                return 1;
+
+            return this.Parent.GetHeight() + 1;
         }
 
     }

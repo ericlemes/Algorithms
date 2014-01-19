@@ -69,7 +69,7 @@ namespace Algorithms.Core
                 return 1;
             else
             {
-                double d = Math.Round(Math.Pow(GoldenRatio, position - 1) / Math.Sqrt(5));                
+                double d = System.Math.Round(Math.Pow(GoldenRatio, position - 1) / Math.Sqrt(5));                
                 return Convert.ToInt64(d);
             }
         }
