@@ -1,5 +1,5 @@
 import unittest
-import graph
+from algorithms.core import graph
 
 class GraphTests(unittest.TestCase):
     def test_calculate_all_routes(self):
@@ -8,13 +8,13 @@ class GraphTests(unittest.TestCase):
         c = graph.Edge("C")
         d = graph.Edge("D")
         e = graph.Edge("E")
-        a.vertices.append(graph.Vertex(b, 1))
-        a.vertices.append(graph.Vertex(c, 2))
-        b.vertices.append(graph.Vertex(d, 3))
-        c.vertices.append(graph.Vertex(d, 4))
-        c.vertices.append(graph.Vertex(e, 4))
-        d.vertices.append(graph.Vertex(e, 2))
-        e.vertices.append(graph.Vertex(a, 1))
+        a.vertices.append(graph.WeightedVertex(b, 1))
+        a.vertices.append(graph.WeightedVertex(c, 2))
+        b.vertices.append(graph.WeightedVertex(d, 3))
+        c.vertices.append(graph.WeightedVertex(d, 4))
+        c.vertices.append(graph.WeightedVertex(e, 4))
+        d.vertices.append(graph.WeightedVertex(e, 2))
+        e.vertices.append(graph.WeightedVertex(a, 1))
         
         def route_has_five_stops(r):
             return len(r) >= 5        

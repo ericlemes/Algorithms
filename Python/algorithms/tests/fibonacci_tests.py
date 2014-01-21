@@ -1,5 +1,5 @@
 import unittest
-import fibonacci
+from algorithms.core import fibonacci
 
 class FibonacciTests(unittest.TestCase) :
     def test_fib_negative(self):

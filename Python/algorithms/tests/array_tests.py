@@ -1,5 +1,5 @@
 import unittest
-import array_algos
+from algorithms.core import array_algos
 
 class ArrayTests (unittest.TestCase) :
     def test_merge_two_sorted_arrays(self):

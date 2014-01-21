@@ -1,13 +1,15 @@
-class Edge:
+class Edge(object):
     item = None
     vertices = None
     
     def __init__(self, item):
         self.item = item
         self.vertices = []
-    
-class Vertex:
+        
+class Vertex(object):
     edge = None
+    
+class WeightedVertex(Vertex):    
     weight = 0
     
     def __init__(self, edge, weight):
@@ -36,7 +38,7 @@ def print_route(route):
     for r in route:
         if (s != ""):
             s += " "
-        s += str(r[0].item)
+        s += str(r[0].item)        
         s += str(r[1])
     return s
 
