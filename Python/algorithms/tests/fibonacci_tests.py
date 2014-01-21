@@ -30,8 +30,12 @@ class FibonacciTests(unittest.TestCase) :
     def test_fib_iter_10(self):  
         self.assertEqual(1, fibonacci.fibonacci_iterative(3))
         self.assertEqual(3, fibonacci.fibonacci_iterative(5))
-        self.assertEqual(34, fibonacci.fibonacci_iterative(10))        
-    
+        self.assertEqual(34, fibonacci.fibonacci_iterative(10))
+        
+    def test_fib_generator(self):        
+        g = fibonacci.fibonacci_generator()
+        l = [g.next() for i in range(7)]                
+        self.assertEqual([0, 1, 1, 2, 3, 5, 8], l)    
         
 if __name__ == '__main__':
     unittest.main()

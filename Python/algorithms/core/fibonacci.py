@@ -18,7 +18,12 @@ def fibonacci_iterative(n):
         n1, n2 = n2, n1 + n2
     return n1
     
-    
+def fibonacci_generator():    
+    n1, n2 = 0, 1
+    while True:
+        yield n1     
+        n1, n2 = n2, n1 + n2        
+        
     
     
     
