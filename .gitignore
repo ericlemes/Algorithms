@@ -22,3 +22,11 @@
 /CSharp/TestResults
 
 /CSharp/Algorithms.UnitTests/*.user
+
+/Python/algorithms/*.pyc
+/Python/algorithms/core/*.pyc
+/Python/algorithms/core/*.pyc
+/Python/algorithms/core/*.pyc
+/Python/algorithms/core/*.pyc
+/Python/algorithms/core/*.pyc
+/Python/algorithms/core/*.pyc

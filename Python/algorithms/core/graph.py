@@ -56,8 +56,42 @@ def parent_dictionary_to_route(parents, startedge, endedge):
     e = endedge
     while e != None:
         route.append(e)
-        e = parents[e]
+        e = parents[e]    
     return reversed(route)
+
+def calculate_shortest_route_weighted(startedge, endedge): #AKA Djkstra
+    def calculate_distance_from(distances, parents, edge):
+        e = edge
+        d = 0
+        while (e != None):
+            d += distances[e]
+            e = parents[e]
+        return d
+    
+    visited = set()
+    parents = {startedge: None}
+    distances = {startedge: 0}
+    q = collections.deque()
+    q.append(startedge)
+    while (len(q) > 0):
+        edge = q.pop()        
+        for vertex in edge.vertices:
+            if (vertex in visited):
+                continue
+            visited.update([vertex])
+            q.append(vertex.edge)
+            d = calculate_distance_from(distances, parents, edge) + vertex.weight
+            if (vertex.edge in distances):                
+                if (d < distances[vertex.edge]):
+                    distances[vertex.edge] = d
+                    parents[vertex.edge] = edge
+            else:
+                distances[vertex.edge] = d
+                parents[vertex.edge] = edge
+    if endedge in distances:
+        return parent_dictionary_to_route(parents, startedge, endedge)
+    else:
+        return
 
 def calculate_shortest_route_unweighted(startedge, endedge):
     visited = set()
@@ -76,7 +110,22 @@ def calculate_shortest_route_unweighted(startedge, endedge):
             parents[adj.edge] = edge
     return 
     
-
+def calculate_longest_route_unweighted(startedge, endedge):
+    def calculate_longest_route_unweighted_recur(edge, endedge, visited, parents):
+        if (edge == endedge):
+            return parent_dictionary_to_route(parents,  edge, endedge)        
+        visited.update([edge])                
+        for vertex in edge.vertices:
+            if vertex.edge in visited:
+                continue
+            parents[vertex.edge] = edge
+            r = calculate_longest_route_unweighted_recur(vertex.edge, endedge, visited, parents)
+            if (r != None):
+                return r
+    
+    visited  = set()
+    parents = {startedge: None}
+    return calculate_longest_route_unweighted_recur(startedge, endedge, visited, parents)        
     
 
     

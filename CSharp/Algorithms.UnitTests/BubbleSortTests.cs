@@ -43,5 +43,14 @@ namespace Algorithms.UnitTests
             Assert.AreEqual(50, l[3]);
             Assert.AreEqual(600, l[4]);
         }
+
+        [TestMethod]
+        public void TestBigBubbleSort()
+        {
+            List<int> l = new List<int>();
+            for (int i = 20000; i >= 0; i--)
+                l.Add(i);
+            BubbleSort2.Sort(l);
+        }
     }
 }
